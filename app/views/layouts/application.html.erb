@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <%= javascript_include_tag 'password_toggle'%>
+    <%#= javascript_include_tag 'password_bar'%>
+    <title>Befocused</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+  </head>
+
+  <body class="d-flex flex-column h-100">
+    <% if user_signed_in? %>
+    <header>
+      <%= render 'layouts/navbar' %>
+    </header>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

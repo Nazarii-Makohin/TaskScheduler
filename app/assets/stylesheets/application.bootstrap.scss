@@ -1,0 +1,54 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+.navbar-nav .nav-item .nav-link.active {
+    border-top: #FFFFFF;
+    border-right: #FFFFFF;
+    border-left: #FFFFFF;
+    border-bottom: 3px solid blue;
+}
+
+.container {
+    padding: 30px 15px 0;
+}
+
+.footer .container {
+    padding: 5px 15px 0;
+}
+
+
+ .custom-button1 {
+     background-color: rgba(155, 209, 232, 0.5);
+     color: blue;
+     padding: 10px 20px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: filter 0.3s ease-in-out;
+     text-decoration: none;
+ }
+
+.custom-button:hover {
+    filter: brightness(0.9);
+}
+
+
+
+ .custom-button2 {
+     background-color: grey;
+     color: white;
+     padding: 10px 20px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease-in-out;
+     width: 150px;
+ }
+
+.custom-button2:hover {
+    background-color: rgba(24, 77, 201);
+}
+
+.text-grey {
+    color: grey;
+}

@@ -1,0 +1,42 @@
+<div class="text-center" style="margin-left: 60%; margin-top: 1%;">
+  <h7 class="text-center" style="margin-right: 5%;">Don't have an account yet?</h7>
+  <%= link_to "Sign up", new_registration_path(resource_name), class: "custom-button1" %>
+</div>
+
+<div class="container mt-5">
+  <div class="row g-5">
+    <div class="col-md-6">
+      <%= image_tag "big.png", class: "img-fluid" %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card-body mt-5">
+        <h1>Login to your account</h1>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "mt-4" }) do |f| %>
+          <div class="form-group mb-5">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %>
+            <div class="input-group">
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control", id: "password-field" %>
+              <div class="input-group-append">
+                <div class="input-group-text" style="cursor: pointer;">
+                  <%= content_tag(:i, nil, class: 'bi bi-eye', id: 'togglePassword') %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group d-flex justify-content-end">
+            <div class="row g-1 mt-5">
+            <%= f.submit "Log in", class: "custom-button2" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

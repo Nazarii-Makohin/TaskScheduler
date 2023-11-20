@@ -1,0 +1,182 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+
+<div class="text-center" style="margin-left: 60%; margin-top: 1%;">
+  <h7 class="text-center" style="margin-right: 5%;">Already have an account?</h7>
+  <%= link_to "Log in", new_session_path(resource_name), class: "custom-button1" %>
+</div>
+
+<div class="container mt-5">
+  <div class="row g-5">
+    <div class="col-md-6">
+      <%= image_tag "big.png", class: "img-fluid" %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card-body mt-5">
+        <h1>Create an account</h1>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mt-4" }) do |f| %>
+          <div class="form-group mb-5">
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: "given-name", class: "form-control" %>
+          </div>
+
+          <div class="form-group mb-5">
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, autocomplete: "family-name", class: "form-control" %>
+          </div>
+
+          <div class="form-group mb-5">
+            <%= f.label :email %>
+            <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %>
+            <div class="input-group">
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control", id: "password-field", oninput: "strengthChecker()" %>
+                <div class="form" style="cursor: pointer;">
+                  <span id="toggle" onclick="toggle()">
+                        <i class="fas fa-eye"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div id="strength-bar"></div>
+
+          <div class="form-group d-flex justify-content-end">
+            <div class="row g-1 mt-5">
+              <%= f.submit "Sign up", class: "custom-button2" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+    let parameters = {
+        count : false,
+        letters : false,
+        numbers : false,
+        special : false
+    }
+    let strengthBar = document.getElementById("strength-bar");
+
+    function strengthChecker(){
+        let password = document.getElementById("password-field").value;
+
+        parameters.letters = (/[A-Za-z]+/.test(password))?true:false;
+        parameters.numbers = (/[0-9]+/.test(password))?true:false;
+        parameters.special = (/[!\"$%&/()=?@~`\\.\';:+=^*_-]+/.test(password))?true:false;
+        parameters.count = (password.length > 7)?true:false;
+
+        let barLength = Object.values(parameters).filter(value=>value);
+
+        console.log(Object.values(parameters), barLength);
+
+        strengthBar.innerHTML = "";
+        for( let i in barLength){
+            let span = document.createElement("span");
+            span.classList.add("strength");
+            strengthBar.appendChild(span);
+        }
+
+        let spanRef = document.getElementsByClassName("strength");
+        for( let i = 0; i < spanRef.length; i++){
+            switch(spanRef.length - 1){
+                case 0 :
+                    spanRef[i].style.background = "#ff3e36";
+                    break;
+                case 1:
+                    spanRef[i].style.background = "#ff691f";
+                    break;
+                case 2:
+                    spanRef[i].style.background = "#ffda36";
+                    break;
+                case 3:
+                    spanRef[i].style.background = "#0be881";
+                    break;
+            }
+        }
+    }
+
+
+    function toggle(){
+        let password = document.getElementById("password-field");
+        let eye = document.getElementById("toggle");
+
+        if(password.getAttribute("type") == "password"){
+            password.setAttribute("type","text");
+            eye.style.color = "#062b61";
+        }
+        else{
+            password.setAttribute("type","password");
+            eye.style.color = "#6b6868";
+        }
+    }
+
+</script>
+<style media="screen">
+    *,
+    *:before,
+    *:after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .wrapper{
+        background-color: #ffffff;
+        width: 400px;
+        padding: 40px 0;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        left: 50%;
+        top: 50%;
+        border-radius: 3px;
+        box-shadow: 0 20px 25px rgba(0,0,0,0.2);
+    }
+
+    input{
+        width: 100%;
+        height: 50px;
+        padding: 0 40px 0 20px;
+        position: relative;
+        background-color: #edf6f9;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(7, 38, 119, 0.68);
+        border-radius: 5px;
+    }
+
+    #toggle{
+        position: absolute;
+        top: 17px;
+        right: 15px;
+        color: #808080;
+        cursor: pointer;
+    }
+    #toggle i{
+        font-size: 20px;
+    }
+    .strength{
+        width: 25%;
+        display: inline-block;
+        position: relative;
+        height: 100%;
+        bottom: 5px;
+    }
+    #strength-bar{
+        background-color: #dcdcdc;
+        height: 10px;
+        position: relative;
+        margin-top: 15px;
+        border-radius: 10px;
+    }
+</style>

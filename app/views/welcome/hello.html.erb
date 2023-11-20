@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="text">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <div class="card-body">
+          <%= render 'about' %>
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <% if user_signed_in? %>
+                <%= link_to(current_user.goal_empty? ? "Get Started" : "Back to My Goals", goals_path, class: "nav-link active" ) %>
+              <% else %>
+                <%= link_to "Get Started", new_user_registration_path, class: "nav-link active" %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <%= image_tag "big.png", class: "img-fluid" %>
+      </div>
+    </div>
+  </div>
+</div>
+
